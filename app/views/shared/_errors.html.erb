@@ -1,0 +1,11 @@
+<% if data_model.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(data_model.errors.count, "error") %> prohibited this profile from being saved:</h2>
+
+      <ul>
+        <% data_model.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+<% end %>
