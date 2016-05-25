@@ -5,6 +5,8 @@ Rails.application.routes.draw do
     resources :users
   end
 
+  resources :questions
+
   resources :profiles, only: [:show, :edit, :update]
 
   devise_for :users, path_names: { sign_up: 'register' },
@@ -15,7 +17,7 @@ Rails.application.routes.draw do
              }
 
   root 'home#index'
-
+  get '/all_tags' => 'home#all_tags'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

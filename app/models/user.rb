@@ -2,6 +2,7 @@ class User < ActiveRecord::Base
 
   has_and_belongs_to_many :roles
   has_one :profile, dependent: :destroy
+  has_many  :questions, :dependent => :destroy
 
   after_create :assign_member_role
   after_create :create_profile

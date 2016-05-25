@@ -10,10 +10,12 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+
 //= require jquery-2.1.1
 //= require jquery_ujs
 //= require bootstrap.min
 //= require turbolinks
+//= require tinymce
 //= require plugins/metisMenu/jquery.metisMenu
 //= require plugins/slimscroll/jquery.slimscroll.min
 //= require plugins/flot/jquery.flot
@@ -32,8 +34,4 @@
 //= require plugins/easypiechart/jquery.easypiechart
 //= require plugins/sparkline/jquery.sparkline.min
 //= require plugins/sparkline/jquery.sparkline.min
-//= require tinymce
-
-$(document).on('page:receive',function(){
-    tinymce.remove();
-});
+//= require jquery.tagsinput

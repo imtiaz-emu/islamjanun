@@ -1,4 +1,5 @@
 class ProfilesController < ApplicationController
+  before_action :authenticate_user!, except: [:show]
   before_action :set_profile, only: [:show, :edit, :update, :destroy]
 
   layout 'member'
@@ -9,6 +10,9 @@ class ProfilesController < ApplicationController
 
   # GET /profiles/1/edit
   def edit
+    if @profile != current_user.profile
+      redirect_to edit_profile_path(current_user.profile)
+    end
   end
 
 
