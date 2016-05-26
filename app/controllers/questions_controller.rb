@@ -1,6 +1,6 @@
 class QuestionsController < ApplicationController
   before_action :authenticate_user!, except: [:show]
-  before_action :set_question, only: [:show, :edit, :update, :destroy]
+  before_action :set_question, only: [:edit, :update, :destroy]
 
   # autocomplete :tag, :name, :class_name => 'ActsAsTaggableOn::Tag'
 
@@ -14,6 +14,7 @@ class QuestionsController < ApplicationController
   # GET /questions/1
   # GET /questions/1.json
   def show
+    @question = Question.includes(:answers, :user => :profile).find(params[:id])
   end
 
   # GET /questions/new

@@ -17,3 +17,15 @@
   font-family: "open sans","Helvetica Neue",Helvetica,Arial,sans-serif;
   font-size: 15px;
 }
+.qanswers-count h2{
+  font-weight: bold;
+}
+.ques-upvote-count{
+  font-size: 40px;
+}
+#question-all-answers{
+  .vote-info{
+    margin-left: 0;
+    margin-top: 20px;
+  }
+}

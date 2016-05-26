@@ -6,7 +6,7 @@ class CreateProfiles < ActiveRecord::Migration
       t.text      :bio
       t.date      :birthday
       t.text      :title
-      t.integer   :points
+      t.integer   :points, :default => 1
       t.string    :fb_link
       t.string    :photo
       t.string    :mobile

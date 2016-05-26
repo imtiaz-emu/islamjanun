@@ -1,0 +1,2 @@
+var answer_id = <%= @answer.id %>;
+$("#answer_" + answer_id.toString()).html('<%=j render :partial => 'answers/form', locals: {question: @answer.question, answer: @answer} %>')

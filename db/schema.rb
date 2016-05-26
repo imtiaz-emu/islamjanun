@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160524182906) do
+ActiveRecord::Schema.define(version: 20160526131812) do
+
+  create_table "answers", force: :cascade do |t|
+    t.integer  "user_id",     limit: 4
+    t.integer  "question_id", limit: 4
+    t.text     "description", limit: 16777215
+    t.boolean  "accepted",                     default: false
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
+  end
 
   create_table "profiles", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
@@ -19,12 +28,12 @@ ActiveRecord::Schema.define(version: 20160524182906) do
     t.text     "bio",        limit: 65535
     t.date     "birthday"
     t.text     "title",      limit: 65535
-    t.integer  "points",     limit: 4
+    t.integer  "points",     limit: 4,     default: 1
     t.string   "fb_link",    limit: 255
     t.string   "photo",      limit: 255
     t.string   "mobile",     limit: 255
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
   end
 
   create_table "questions", force: :cascade do |t|

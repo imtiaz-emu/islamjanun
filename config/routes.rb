@@ -5,7 +5,9 @@ Rails.application.routes.draw do
     resources :users
   end
 
-  resources :questions
+  resources :questions do
+    resources :answers
+  end
 
   resources :profiles, only: [:show, :edit, :update]
 

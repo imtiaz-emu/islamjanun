@@ -1,0 +1,1 @@
+$("#question-all-answers").html('<%=j render :partial => 'questions/answers', locals: {answers: @question.answers.includes(:user => :profile)} %>')

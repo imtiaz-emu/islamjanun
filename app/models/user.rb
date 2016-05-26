@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :roles
   has_one :profile, dependent: :destroy
   has_many  :questions, :dependent => :destroy
+  has_many  :answers, :dependent => :destroy
 
   after_create :assign_member_role
   after_create :create_profile
@@ -102,5 +103,7 @@ class User < ActiveRecord::Base
   private
   def assign_member_role
     RolesUsers.create!(role_id: Role::USER_ROLE[:member], user_id: self.id)
+    new_first_name = self.email.split("@") + self.id.to_s
+    self.update_column(:first_name, new_first_name)
   end
 end

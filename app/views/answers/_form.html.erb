@@ -1,0 +1,48 @@
+<%= tinymce_assets %>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="ibox float-e-margins">
+      <div class="ibox-title">
+        <h5>
+          <%= answer.new_record? ? 'Your Answer' : 'Edit your Answer' %>
+        </h5>
+      </div>
+      <div class="ibox-content">
+        <div class="row">
+          <%= form_for([question, answer], html: {role: "form", class: 'answer-form-ce'}, remote: true) do |f| %>
+              <%= render :partial => 'shared/errors', :locals => {data_model: answer} %>
+
+              <div class="col-sm-12">
+                <div class="form-group">
+                  <%= f.text_area :description, class: "form-control tinymce", placeholder: "Enter answer", rows: '5'%>
+                  <%= tinymce %>
+                </div>
+
+                <div class="actions pull-right">
+                  <%= link_to 'Submit', 'javascript:void(0)', id: "answer-submit-btn", class: "btn btn-sm btn-primary m-t-n-xs" %>
+                  <button type="submit" class="hidden hidden-submit-btn"></button>
+                </div>
+
+              </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+
+    $(document).on('ready page:load', function () {
+        tinymce.remove();
+        tinymce.init({selector:'textarea'});
+    });
+    $('#answer-submit-btn').click(function(){
+        var content = tinymce.editors[0].getContent();
+        if(content.length > 20){
+            $('.hidden-submit-btn').click();
+        }
+    })
+
+</script>
