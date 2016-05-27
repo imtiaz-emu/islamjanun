@@ -10,7 +10,7 @@
 
 <% if answers.count > 0 %>
     <% answers.each do |answer| %>
-        <div id="answer_<%= answer.id %>">
+        <div class="each_answers" id="answer_<%= answer.id %>">
           <div class="row">
             <div class="col-md-1 avote-operations">
               <%= render :partial => 'shared/avotes', locals: {answer: answer} %>
@@ -26,7 +26,7 @@
                       <div class="vote-info q-user-interactions">
                         <% if current_user == answer.user %>
                             <i class="fa fa-pencil-square"></i> <%= link_to 'Edit', edit_question_answer_path(answer.question, answer), remote: true %>
-                            <i class="fa fa-trash"></i> <%= link_to 'Destroy', question_answer_path(answer.question, answer), method: :delete ,remote: true %>
+                            <i class="fa fa-trash"></i> <%= link_to 'Destroy', question_answer_path(answer.question, answer), method: :delete, remote: true %>
                         <% end %>
                         <i class="fa fa-clock-o"></i> <%= distance_of_time_in_words(Time.now, answer.created_at) %>
                         <i class="fa fa-eraser"></i> <%= distance_of_time_in_words(Time.now, answer.updated_at) %>
@@ -38,6 +38,7 @@
                           <a class="pull-left" href="<%= profile_path(answer.user.profile) %>">
                             <%= image_tag answer.user.profile.photo.present? ? answer.user.profile.photo_url(:thumb) : 'http://placehold.it/50x50' %>
                           </a>
+
                           <div class="media-body">
                             <a href="<%= profile_path(answer.user.profile) %>">
                               <%= answer.user.profile.name %>
@@ -62,5 +63,7 @@
 <% end %>
 
 <% if user_can_give_answer(@question) %>
-    <%= render :partial => 'answers/form', locals: {question: @question, answer: Answer.new} %>
+    <div class="new-answer-form">
+      <%= render :partial => 'answers/form', locals: {question: @question, answer: Answer.new} %>
+    </div>
 <% end %>

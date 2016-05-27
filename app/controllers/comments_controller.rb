@@ -16,21 +16,22 @@ class CommentsController < ApplicationController
   def create
     @commentable = find_commentable
     @commentable.comments.create(comment_params)
-    @comments = @commentable.comments.order('created_at DESC')
+    @comments = @commentable.comments.order('created_at ASC')
   end
 
   # PATCH/PUT /comments/1
   # PATCH/PUT /comments/1.json
   def update
     @comment.update(comment_params)
-    @comments = @comment.commentable.comments.order('created_at DESC')
+    @commentable = @comment.commentable
+    @comments = @commentable.comments.order('created_at ASC')
   end
 
   # DELETE /comments/1
   # DELETE /comments/1.json
   def destroy
     @commentable = @comment.commentable
-    @comments = @commentable.comments.order('created_at DESC')
+    @comments = @commentable.comments.order('created_at ASC')
     @comment.destroy
   end
 

@@ -1,4 +1,4 @@
-<div class="social-footer <%= 'hidden' if comments.count == 0 %>">
+<div class="social-footer <%= 'hidden' if !current_user.present? %>">
 
   <% comments.each do |comment| %>
       <div class="social-comment">
@@ -9,8 +9,10 @@
           <%= comment.description %>
           <br>
           <% if current_user == comment.user %>
-              <a class="small" href="<%= edit_comment_path(comment) %>" data-remote="true"><i class="fa fa-pencil"></i> Edit</a> -
-              <a class="small" href="<%= comment_path(comment)%>" data-method="delete" data-remote="true"><i class="fa fa-trash"></i> Destroy</a> -
+              <a class="small" href="<%= edit_comment_path(comment) %>" data-remote="true"><i class="fa fa-pencil"></i>
+                Edit</a> -
+              <a class="small" href="<%= comment_path(comment) %>" data-method="delete" data-remote="true"><i class="fa fa-trash"></i>
+                Destroy</a> -
           <% end %>
           <small class="text-muted"><%= distance_of_time_in_words(Time.now - comment.created_at) %></small>
         </div>
@@ -24,7 +26,3 @@
   <% end %>
 
 </div>
-
-<script>
-
-</script>

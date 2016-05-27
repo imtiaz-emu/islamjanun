@@ -17,7 +17,7 @@ module ApplicationHelper
   end
 
   def all_comments(obj)
-    obj.comments.order('created_at DESC')
+    obj.comments.order('created_at ASC')
   end
 
   def unique_id_generator(obj)
