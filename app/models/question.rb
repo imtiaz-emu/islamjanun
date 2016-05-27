@@ -5,6 +5,8 @@ class Question < ActiveRecord::Base
   before_destroy :check_if_answer_present
 
   acts_as_taggable_on :tags
+  include Impressionist::IsImpressionable
+  is_impressionable
 
   private
 

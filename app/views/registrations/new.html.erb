@@ -1,50 +1,60 @@
-<div class="container main-container headerOffset">
-  <div class="row">
-    <div class="col-lg-9 col-md-9 col-sm-7">
-      <h2 class="section-title-inner">
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>RAILS PACK | Login</title>
+
+  <%= stylesheet_link_tag 'application', :media => 'all' %>
+
+</head>
+
+<body class="gray-bg">
+
+<div class="loginColumns animated fadeInDown">
+  <div class="main-container headerOffset">
+    <div class="row userInfo">
+      <div class="col-xs-6 col-sm-6">
+        <h2 class="section-title-inner">
         <span>
           <i class="fa fa-lock"></i>
           Authentication
         </span>
-      </h2>
+        </h2>
 
-      <div class="row userInfo">
-        <div class="col-xs-6 col-sm-6">
-          <div class="control-group">
-            <%= link_to  user_omniauth_authorize_path(:facebook), :class => 'btn btn-block btn-social btn-facebook' do %>
-                <i class="fa fa-facebook"></i> Sign up with Facebook
-            <% end %>
+        <div class="control-group">
+          <%= link_to user_omniauth_authorize_path(:facebook), :class => 'btn btn-block btn-social btn-facebook' do %>
+              <i class="fa fa-facebook"></i> Sign up with Facebook
+          <% end %>
 
-            <br />
-            <%= link_to  user_omniauth_authorize_path(:twitter), :class => 'btn btn-block btn-social btn-twitter' do %>
-                <i class="fa fa-twitter"></i> Sign up with Twitter
-            <% end %>
+          <br/>
+          <%= link_to user_omniauth_authorize_path(:twitter), :class => 'btn btn-block btn-social btn-twitter' do %>
+              <i class="fa fa-twitter"></i> Sign up with Twitter
+          <% end %>
 
-            <br />
-            <%= link_to  user_omniauth_authorize_path(:google_oauth2), :class => 'btn btn-block btn-social btn-google' do %>
-                <i class="fa fa-google"></i> Sign up with Google
-            <% end %>
+          <br/>
+          <%= link_to user_omniauth_authorize_path(:google_oauth2), :class => 'btn btn-block btn-social btn-google' do %>
+              <i class="fa fa-google"></i> Sign up with Google
+          <% end %>
 
-            <br />
-            <%= link_to  user_omniauth_authorize_path(:linkedin), :class => 'btn btn-block btn-social btn-linkedin' do %>
-                <i class="fa fa-linkedin"></i> Sign up with Linked In
-            <% end %>
-          </div>
+          <br/>
+          <%= link_to user_omniauth_authorize_path(:linkedin), :class => 'btn btn-block btn-social btn-linkedin' do %>
+              <i class="fa fa-linkedin"></i> Sign up with Linked In
+          <% end %>
         </div>
       </div>
-
-      <div class="row userInfo">
-        <div class="col-xs-12 col-sm-6">
-          <h5 class="text-center" style="padding:10px 0 10px 0;">OR</h5>
-        </div>
-      </div>
-      <div class="row">
-        <%= devise_error_messages! %>
-      </div>
-      <div class="row userInfo">
-        <div class="col-xs-12 col-sm-6">
-          <h2 class="block-title-2">Create an account</h2>
-          <%= form_for resource, :as => resource_name, :url => registration_path(resource_name), :html => {:class => 'regForm', :method => :post} do |f| %>
+      <div class="col-xs-12 col-sm-6 login-with-oauth">
+        <h2 class="section-title-inner">
+        <span>
+          <i class="fa fa-user"></i>
+          Create Account
+        </span>
+        </h2>
+        <%= form_for resource, :as => resource_name, :url => registration_path(resource_name), :html => {:class => 'regForm', :method => :post} do |f| %>
+            <%= devise_error_messages! %>
             <div class="form-group">
               <label>First name</label>
               <%= f.text_field :first_name, class: 'form-control', :placeholder => 'Enter First Name', :size => '50' %>
@@ -68,19 +78,37 @@
             <div class="error"></div>
             <div>
               <div>
-                <%= f.submit 'Submit', class:'btn btn-primary', :value => 'Submit' %>
+                <%= f.submit 'Submit', class: 'btn btn-primary', :value => 'Submit' %>
               </div>
             </div>
-          <% end %>
-        </div>
-        </div>
+        <% end %>
+      </div>
     </div>
-    <!-- /row end
-    -->
-    <div class="col-lg-3 col-md-3 col-sm-5"></div>
+
   </div>
-  <div style="clear:both"></div>
+  <!-- /row end
+  -->
+  <div class="col-lg-3 col-md-3 col-sm-5"></div>
 </div>
+
+</div>
+<hr/>
+<div class="row">
+  <div class="col-md-6">
+    Copyright RAILS PACK
+  </div>
+  <div class="col-md-6 text-right">
+    <small>© 2015-2016</small>
+  </div>
+</div>
+</div>
+
+</body>
+
+</html>
+
+
+
 <script type="text/css">
 
   /*flash*/
@@ -111,5 +139,6 @@
     color: #468847;
     text-align: left;
     }
+
 
 </script>

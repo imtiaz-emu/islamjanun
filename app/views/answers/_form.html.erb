@@ -34,10 +34,10 @@
 
 <script>
 
-    $(document).on('ready page:load', function () {
-        tinymce.remove();
-        tinymce.init({selector:'textarea'});
-    });
+//    $(document).on('ready page:load', function () {
+//        tinymce.remove();
+//        tinymce.init({selector:'textarea', theme: "modern"});
+//    });
     $('#answer-submit-btn').click(function(){
         var content = tinymce.editors[0].getContent();
         if(content.length > 20){

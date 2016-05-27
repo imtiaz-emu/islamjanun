@@ -23,9 +23,10 @@
 .ques-upvote-count{
   font-size: 40px;
 }
-#question-all-answers{
-  .vote-info{
+.vote-info.q-user-interactions{
     margin-left: 0;
     margin-top: 20px;
-  }
+}
+.login-with-oauth{
+  border-left: 1px solid #000;
 }

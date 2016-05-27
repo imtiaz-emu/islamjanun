@@ -103,7 +103,7 @@ class User < ActiveRecord::Base
   private
   def assign_member_role
     RolesUsers.create!(role_id: Role::USER_ROLE[:member], user_id: self.id)
-    new_first_name = self.email.split("@") + self.id.to_s
+    new_first_name = self.email.split("@")[0] + self.id.to_s
     self.update_column(:first_name, new_first_name)
   end
 end

@@ -1,6 +1,6 @@
 # encoding: utf-8
 class RegistrationsController < Devise::RegistrationsController
-
+  layout false
   before_action :configure_permitted_parameters
   def new
     super

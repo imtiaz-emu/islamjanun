@@ -1,7 +1,7 @@
 <%= tinymce_assets %>
 
 <div class="row">
-  <div class="col-md-8">
+  <div class="col-md-9">
     <div class="ibox float-e-margins">
       <div class="ibox-title">
         <h5><%= @question.new_record? ? 'New Question' : 'Edit Question' %>
@@ -45,7 +45,8 @@
 
                 <div class="actions pull-right">
                   <%= link_to 'Back', @question.new_record? ? questions_path : question_path(@question), class: 'btn btn-sm btn-white m-t-n-xs'  %>
-                  <button type="submit" class="btn btn-sm btn-primary m-t-n-xs"><strong>Save</strong></button>
+                  <%= link_to 'Save', 'javascript:void(0)', id: "answer-submit-btn", class: "btn btn-sm btn-primary m-t-n-xs" %>
+                  <button type="submit" class="hidden hidden-submit-btn"></button>
                 </div>
 
               </div>
@@ -54,7 +55,7 @@
       </div>
     </div>
   </div>
-  <div class="col-md-4">
+  <div class="col-md-3">
     <div class="jumbotron"></div>
   </div>
 </div>
@@ -69,9 +70,13 @@
         'autocomplete': {}
     });
 
-    $(document).on('ready page:load', function () {
-        tinymce.remove();
-        tinymce.init({selector:'textarea'});
-    });
+
+
+    $('#answer-submit-btn').click(function(){
+        var content = tinymce.editors[0].getContent();
+        if(content.length > 20){
+            $('.hidden-submit-btn').click();
+        }
+    })
 
 </script>

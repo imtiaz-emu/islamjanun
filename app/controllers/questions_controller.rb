@@ -1,8 +1,9 @@
 class QuestionsController < ApplicationController
+  skip_before_filter :verify_authenticity_token, only: [:destroy]
   before_action :authenticate_user!, except: [:show]
   before_action :set_question, only: [:edit, :update, :destroy]
 
-  # autocomplete :tag, :name, :class_name => 'ActsAsTaggableOn::Tag'
+  impressionist :actions=>[:show]
 
   layout 'member'
   # GET /questions
@@ -15,6 +16,7 @@ class QuestionsController < ApplicationController
   # GET /questions/1.json
   def show
     @question = Question.includes(:answers, :user => :profile).find(params[:id])
+    @no_of_view = @question.impressionist_count
   end
 
   # GET /questions/new

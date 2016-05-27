@@ -4,6 +4,7 @@ class Role < ActiveRecord::Base
   # Role ID for authorization
   USER_ROLE   = {
       super_admin: 1,
-      member: 2,
+      moderator: 2,
+      member: 3,
   }
 end

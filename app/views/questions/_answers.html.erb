@@ -31,7 +31,7 @@
 
                   <div class="row">
                     <div class="col-md-8">
-                      <div class="vote-info">
+                      <div class="vote-info q-user-interactions">
                         <% if current_user == answer.user %>
                             <i class="fa fa-pencil-square"></i> <%= link_to 'Edit', edit_question_answer_path(answer.question, answer), remote: true %>
                             <i class="fa fa-trash"></i> <%= link_to 'Destroy', question_answer_path(answer.question, answer), method: :delete ,remote: true %>
