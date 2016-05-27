@@ -5,9 +5,12 @@ class Answer < ActiveRecord::Base
   has_many :downvotes, as: :downvotable
   has_many :comments, as: :commentable
 
-  # before_destroy :check_votes_present
-  #
-  # def check_votes_present
-  #
-  # end
+  before_destroy :check_downvotes_present
+
+  def check_votes_present
+    if self.downvotes.count > 0
+      errors.add(:base, 'This answer cannot be deleted because of downvotes.')
+      return false
+    end
+  end
 end

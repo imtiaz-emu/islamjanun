@@ -28,4 +28,16 @@ module ApplicationHelper
     end
   end
 
+  def all_questions
+    Question.all
+  end
+
+  def all_answers
+    Answer.all
+  end
+
+  def all_tags
+    ActsAsTaggableOn::Tag.all
+  end
+
 end

@@ -7,7 +7,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>RAILS PACK - Landing Page</title>
+  <title>Islam Janun </title>
 
   <!-- Bootstrap core CSS -->
   <%= stylesheet_link_tag 'application', :media => 'all' %>
@@ -147,6 +147,7 @@
   </nav>
 </div>
 <div id="page-wrapper" class="gray-bg <%= params[:controller] + '-' + params[:action] %>">
+  <%= render :partial => 'shared/top_options_bar' %>
   <div class="wrapper wrapper-content animated fadeInRight">
     <div class="container">
       <%= bootstrap_flash %>

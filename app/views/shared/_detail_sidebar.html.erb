@@ -1,0 +1,46 @@
+<div class="wrapper wrapper-content project-manager">
+  <h4>Question description</h4>
+
+  <table class="table small m-b-xs">
+    <tbody>
+    <tr>
+      <td>
+        Asked: <strong><%= distance_of_time_in_words(Time.now - question.created_at) %></strong>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Viewed: <strong><%= question.impressionist_count %></strong>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <p class="small font-bold">
+    <span><i class="fa fa-circle text-warning"></i> Top Questions</span>
+  </p>
+  <ul class="todo-list m-t small-list ui-sortable">
+    <% top_questions(question.id).each do |ques| %>
+        <li>
+          <a class="check-link" href="<%= question_path(ques[3]) %>">
+            <span class="m-l-xs"><%= ques[2] %></span>
+          </a>
+        </li>
+    <% end %>
+  </ul>
+
+  <div class="advertise-zone" style="margin-bottom: 15px">
+    <%= image_tag 'http://placehold.it/230x250' %>
+  </div>
+
+  <h5>Related Questions</h5>
+  <ul class="todo-list m-t small-list ui-sortable">
+    <% related_questions(question).each do |ques| %>
+        <li>
+          <a class="check-link" href="<%= question_path(ques) %>">
+            <span class="m-l-xs"><%= ques.title %></span>
+          </a>
+        </li>
+    <% end %>
+  </ul>
+</div>

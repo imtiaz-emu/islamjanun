@@ -65,7 +65,7 @@
                             <a href="<%= profile_path(question.user.profile) %>">
                               <%= question.user.profile.name %>
                             </a>
-                            <small class="text-muted">97 Points</small>
+                            <small class="text-muted"><%= question.user.profile.points %> Points</small>
                           </div>
                         </div>
                       </div>
@@ -80,6 +80,6 @@
   </div>
 
   <div class="col-md-3">
-    <div class="jumbotron"></div>
+    <%= render :partial => 'shared/dashboard_sidebar' %>
   </div>
 </div>
