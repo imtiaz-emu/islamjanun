@@ -1,0 +1,30 @@
+<div class="social-footer <%= 'hidden' if comments.count == 0 %>">
+
+  <% comments.each do |comment| %>
+      <div class="social-comment">
+        <div class="media-body">
+          <a href="<%= profile_path(comment.user.profile) %>">
+            <%= comment.user.profile.name %>
+          </a>
+          <%= comment.description %>
+          <br>
+          <% if current_user == comment.user %>
+              <a class="small" href="<%= edit_comment_path(comment) %>" data-remote="true"><i class="fa fa-pencil"></i> Edit</a> -
+              <a class="small" href="<%= comment_path(comment)%>" data-method="delete" data-remote="true"><i class="fa fa-trash"></i> Destroy</a> -
+          <% end %>
+          <small class="text-muted"><%= distance_of_time_in_words(Time.now - comment.created_at) %></small>
+        </div>
+      </div>
+  <% end %>
+
+  <% if current_user.present? %>
+      <div class="social-comment" id="<%= unique_id_generator(commentable) %>">
+        <%= render :partial => 'comments/form', locals: {comment: Comment.new, commentable: commentable} %>
+      </div>
+  <% end %>
+
+</div>
+
+<script>
+
+</script>

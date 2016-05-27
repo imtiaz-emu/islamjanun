@@ -47,6 +47,10 @@
       <% end %>
     </div>
 
+    <div id="question-all-comments">
+      <%= render :partial => 'comments/comments', locals: {comments: @comments, commentable: @question} %>
+    </div>
+
     <div id="question-all-answers">
       <%= render :partial => 'questions/answers', locals: {answers: @question.answers.includes(:user => :profile)} %>
     </div>

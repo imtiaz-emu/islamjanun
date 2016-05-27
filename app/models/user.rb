@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   has_many  :answers, :dependent => :destroy
   has_many  :upvotes, :dependent => :destroy
   has_many  :downvotes, :dependent => :destroy
+  has_many  :comments, :dependent => :destroy
 
   after_create :assign_member_role
   after_create :create_profile

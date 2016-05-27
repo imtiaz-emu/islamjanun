@@ -1,0 +1,6 @@
+<% if @commentable.is_a?(Answer) %>
+    var answer_id = <%= @commentable.id %>;
+    $("#answer_" + answer_id.toString() + "-all-comments").html('<%=j render :partial => 'comments/comments', locals: {comments: @comments, commentable: @commentable} %>');
+<% else %>
+    $("#question-all-comments").html('<%=j render :partial => 'comments/comments', locals: {comments: @comments, commentable: @commentable} %>');
+<% end %>

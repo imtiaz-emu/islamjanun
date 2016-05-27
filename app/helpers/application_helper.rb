@@ -16,4 +16,16 @@ module ApplicationHelper
     end
   end
 
+  def all_comments(obj)
+    obj.comments.order('created_at DESC')
+  end
+
+  def unique_id_generator(obj)
+    if obj.is_a?(Answer)
+      'a_' + obj.id.to_s + '-comment-form'
+    else
+      'q_' + obj.id.to_s + '-comment-form'
+    end
+  end
+
 end

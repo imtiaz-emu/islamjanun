@@ -1,0 +1,14 @@
+<%= form_for(comment, html: {role: "form"}, remote: true) do |f| %>
+    <div class="media-body">
+      <% if commentable.is_a?(Question) %>
+          <%= f.hidden_field :q_id, value: commentable.id %>
+      <% else %>
+          <%= f.hidden_field :a_id, value: commentable.id %>
+      <% end %>
+      <%= f.hidden_field :user_id, value: current_user.id %>
+      <%= f.text_field :description, class: "form-control", placeholder: "Write comment...", required: true, autocomplete: 'off'  %>
+    </div>
+    <input type="submit"
+           style="position: absolute; left: -9999px; width: 1px; height: 1px;"
+           tabindex="-1" />
+<% end %>

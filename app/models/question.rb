@@ -3,6 +3,7 @@ class Question < ActiveRecord::Base
   has_many  :answers
   has_many :upvotes, as: :upvotable
   has_many :downvotes, as: :downvotable
+  has_many :comments, as: :commentable
 
   before_destroy :check_if_answer_present
 

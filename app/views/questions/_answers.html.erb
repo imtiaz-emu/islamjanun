@@ -50,6 +50,11 @@
                   </div>
                 </div>
               </div>
+
+              <div id="answer_<%= answer.id %>-all-comments">
+                <%= render :partial => 'comments/comments', locals: {comments: all_comments(answer), commentable: answer} %>
+              </div>
+
             </div>
           </div>
         </div>

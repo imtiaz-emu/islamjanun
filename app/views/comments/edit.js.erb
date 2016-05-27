@@ -1,0 +1,7 @@
+<% if @comment.commentable.is_a?(Answer) %>
+var answer_id = <%= @comment.commentable.id %>;
+$("#a_" + answer_id.toString() + "-comment-form").html('<%=j render :partial => 'comments/form', locals: {comment: @comment, commentable: @comment.commentable} %>');
+<% else %>
+var ques_id = <%= @comment.commentable.id %>;
+$("#q_" + ques_id.toString() + "-comment-form").html('<%=j render :partial => 'comments/form', locals: {comment: @comment, commentable: @comment.commentable} %>');
+<% end %>

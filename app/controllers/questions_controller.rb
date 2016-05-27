@@ -21,6 +21,7 @@ class QuestionsController < ApplicationController
   def show
     @question = Question.includes(:answers, :user => :profile).find(params[:id])
     @no_of_view = @question.impressionist_count
+    @comments = @question.comments.includes(:user => :profile)
   end
 
   # GET /questions/new
