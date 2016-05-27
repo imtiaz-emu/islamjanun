@@ -9,6 +9,9 @@ Rails.application.routes.draw do
     resources :answers
   end
 
+  get '/upvote' => 'vote#upvote'
+  get '/downvote' => 'vote#downvote'
+
   resources :profiles, only: [:show, :edit, :update]
 
   devise_for :users, path_names: { sign_up: 'register' },

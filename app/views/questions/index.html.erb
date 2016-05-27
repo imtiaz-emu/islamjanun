@@ -8,10 +8,10 @@
                 <tbody>
                 <tr>
                   <td>
-                    <strong>5</strong> Upvotes
+                    <strong><%= question.upvotes.count %></strong> Upvotes
                   </td>
                   <td>
-                    <strong>1</strong> Downvotes
+                    <strong><%= question.downvotes.count %></strong> Downvotes
                   </td>
                 </tr>
                 <tr>
@@ -19,15 +19,15 @@
                     <strong>61</strong> Comments
                   </td>
                   <td>
-                    <strong>54</strong> Views
+                    <strong><%= question.impressionist_count %></strong> Views
                   </td>
                 </tr>
                 <tr>
                   <td>
-                    <strong>3</strong> Tags
+                    <strong><%= question.tags.count %></strong> Tags
                   </td>
                   <td>
-                    <strong>9</strong> Answers
+                    <strong><%= question.answers.count %></strong> Answers
                   </td>
                 </tr>
                 </tbody>

@@ -1,0 +1,5 @@
+<% if @upvotable.is_a?(Question) %>
+    $(".qvote-operations").html('<%=j render :partial => 'shared/qvotes', locals: {question: @upvotable} %>')
+<% else %>
+    $(".avote-operations").html('<%=j render :partial => 'shared/avotes', locals: {answer: @upvotable} %>')
+<% end %>

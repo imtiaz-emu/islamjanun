@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160527031357) do
+ActiveRecord::Schema.define(version: 20160527114534) do
 
   create_table "answers", force: :cascade do |t|
     t.integer  "user_id",     limit: 4
@@ -20,6 +20,14 @@ ActiveRecord::Schema.define(version: 20160527031357) do
     t.boolean  "accepted",                     default: false
     t.datetime "created_at",                                   null: false
     t.datetime "updated_at",                                   null: false
+  end
+
+  create_table "downvotes", force: :cascade do |t|
+    t.integer  "user_id",          limit: 4
+    t.integer  "downvotable_id",   limit: 4
+    t.string   "downvotable_type", limit: 255
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
   end
 
   create_table "impressions", force: :cascade do |t|
@@ -101,6 +109,14 @@ ActiveRecord::Schema.define(version: 20160527031357) do
   end
 
   add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
+
+  create_table "upvotes", force: :cascade do |t|
+    t.integer  "user_id",        limit: 4
+    t.integer  "upvotable_id",   limit: 4
+    t.string   "upvotable_type", limit: 255
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false

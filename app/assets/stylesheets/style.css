@@ -5409,7 +5409,7 @@ table.shoping-cart-table tr td:last-child {
 }
 .vote-actions {
   float: left;
-  width: 30px;
+  /*width: 30px;*/
   margin-right: 15px;
   text-align: center;
 }

@@ -1,6 +1,8 @@
 class Question < ActiveRecord::Base
   belongs_to :user
   has_many  :answers
+  has_many :upvotes, as: :upvotable
+  has_many :downvotes, as: :downvotable
 
   before_destroy :check_if_answer_present
 

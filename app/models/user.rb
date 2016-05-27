@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
   has_one :profile, dependent: :destroy
   has_many  :questions, :dependent => :destroy
   has_many  :answers, :dependent => :destroy
+  has_many  :upvotes, :dependent => :destroy
+  has_many  :downvotes, :dependent => :destroy
 
   after_create :assign_member_role
   after_create :create_profile

@@ -23,6 +23,9 @@
 .ques-upvote-count{
   font-size: 40px;
 }
+.ans-upvote-count{
+  font-size: 30px;
+}
 .vote-info.q-user-interactions{
     margin-left: 0;
     margin-top: 20px;
@@ -37,4 +40,13 @@
     overflow: hidden;
     text-overflow: ellipsis;
   }
+}
+.not-voted{
+  color: #fff;
+}
+.voted{
+  color: #1ab394;
+}
+.vote-actions{
+  width: 100%;
 }
