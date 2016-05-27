@@ -30,3 +30,11 @@
 .login-with-oauth{
   border-left: 1px solid #000;
 }
+.questions-index{
+  .ibox-content p{
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}

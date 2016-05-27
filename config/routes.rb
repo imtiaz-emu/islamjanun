@@ -18,7 +18,7 @@ Rails.application.routes.draw do
                              passwords:           'passwords'
              }
 
-  root 'home#index'
+  root 'questions#index'
   get '/all_tags' => 'home#all_tags'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

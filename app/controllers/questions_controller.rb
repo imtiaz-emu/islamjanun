@@ -1,6 +1,6 @@
 class QuestionsController < ApplicationController
   skip_before_filter :verify_authenticity_token, only: [:destroy]
-  before_action :authenticate_user!, except: [:show]
+  before_action :authenticate_user!, except: [:show, :index]
   before_action :set_question, only: [:edit, :update, :destroy]
 
   impressionist :actions=>[:show]
@@ -9,7 +9,11 @@ class QuestionsController < ApplicationController
   # GET /questions
   # GET /questions.json
   def index
-    @questions = Question.all
+    if params[:t].present?
+      @questions =  Question.includes(:answers, :user => :profile).order('updated_at DESC').tagged_with(params[:t])
+    else
+      @questions = Question.includes(:answers, :user => :profile).order('updated_at DESC')
+    end
   end
 
   # GET /questions/1
