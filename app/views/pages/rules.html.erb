@@ -23,13 +23,14 @@
           </div>
         </li>
         <li>
-          <div>
-            <p><%=h t('rules.five') %></p>
+          <div class="rule_five">
+            <p><%= t('rules.five').html_safe %></p>
           </div>
         </li>
         <li>
           <div>
-            <p><%= t("rules.six", :href => link_to(t("rules.link"), 'https://github.com/imtiaz-emu/islamjanun/issues')) %></p>
+            <% link = link_to t('rules.link'), "https://github.com/imtiaz-emu/islamjanun/issues" %>
+            <p><%= t('rules.six', :href => link ).html_safe %></p>
           </div>
         </li>
       </ul>

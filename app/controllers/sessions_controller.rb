@@ -1,5 +1,7 @@
 # encoding: utf-8
 class SessionsController < Devise::SessionsController
+  skip_before_filter :verify_authenticity_token, :only => :destroy
+
   layout false
   respond_to :html, :json
   def create
