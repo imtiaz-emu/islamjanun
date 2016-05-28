@@ -3,7 +3,12 @@
     <i class="fa fa-chevron-up fa-4x <%= upvoted(question) ? 'voted' : 'not-voted' %>"> </i>
   </a>
 
-  <div class="ques-upvote-count"><%= question.upvotes.count %></div>
+  <span>
+    <div class="ques-upvote-count">+<%= question.upvotes.count %></div>
+    <div class="vote-count-separator"></div>
+    <div class="ques-downvote-count">-<%= question.downvotes.count %></div>
+  </span>
+
   <a href="<%= downvote_path(q_id: question.id) %>" data-remote="true">
     <i class="fa fa-chevron-down fa-4x <%= downvoted(question) ? 'voted' : 'not-voted' %>"> </i>
   </a>

@@ -1,5 +1,10 @@
-<% if @upvotable.is_a?(Question) %>
-    $(".qvote-operations").html('<%=j render :partial => 'shared/qvotes', locals: {question: @upvotable} %>')
+<% if @error.present? %>
+    alert('<%== escape_javascript @error %>');
 <% else %>
-    $(".avote-operations").html('<%=j render :partial => 'shared/avotes', locals: {answer: @upvotable} %>')
+    <% if @upvotable.is_a?(Question) %>
+        $(".qvote-operations").html('<%=j render :partial => 'shared/qvotes', locals: {question: @upvotable} %>');
+    <% else %>
+        var answer_id = <%= @upvotable.id %>;
+        $("#answer_" + answer_id.toString() + " .avote-operations").html('<%=j render :partial => 'shared/avotes', locals: {answer: @upvotable} %>')
+    <% end %>
 <% end %>

@@ -61,3 +61,18 @@
     <%= render :partial => 'shared/detail_sidebar', locals: {:question => @question} %>
   </div>
 </div>
+
+<% unless current_user.present? %>
+<script>
+    $(document).ready(function(){
+      $('.fa-chevron-up').click(function(e){
+         alert("You need to sign in");
+          return false;
+      });
+      $('.fa-chevron-down').click(function(e){
+          alert("You need to sign in");
+          return false;
+      });
+  })
+</script>
+<% end %>

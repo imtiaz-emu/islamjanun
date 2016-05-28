@@ -22,7 +22,7 @@
   <ul class="todo-list m-t small-list ui-sortable">
     <% top_questions(question.id).each do |ques| %>
         <li>
-          <a class="check-link" href="<%= question_path(ques[3]) %>">
+          <a class="check-link" href="<%= question_path(ques[3]) %>" data-no-turbolink="true">
             <span class="m-l-xs"><%= ques[2] %></span>
           </a>
         </li>
@@ -37,7 +37,7 @@
   <ul class="todo-list m-t small-list ui-sortable">
     <% related_questions(question).each do |ques| %>
         <li>
-          <a class="check-link" href="<%= question_path(ques) %>">
+          <a class="check-link" href="<%= question_path(ques) %>" data-no-turbolink="true">
             <span class="m-l-xs"><%= ques.title %></span>
           </a>
         </li>

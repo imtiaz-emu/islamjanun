@@ -3,7 +3,7 @@ class QuestionsController < ApplicationController
   before_action :authenticate_user!, except: [:show, :index]
   before_action :set_question, only: [:edit, :update, :destroy]
 
-  impressionist :actions=>[:show]
+  impressionist :actions=>[:show], unique: [:session_hash]
 
   layout 'member'
   # GET /questions
