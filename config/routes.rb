@@ -16,6 +16,9 @@ Rails.application.routes.draw do
 
   resources :profiles, only: [:show, :edit, :update]
 
+  get '/pages/tags' => 'pages#tags'
+  get '/pages/rules' => 'pages#rules'
+
   devise_for :users, path_names: { sign_up: 'register' },
              controllers: {  omniauth_callbacks:  'users/omniauth_callbacks',
                              sessions:            'sessions',
@@ -25,6 +28,12 @@ Rails.application.routes.draw do
 
   root 'questions#index'
   get '/all_tags' => 'home#all_tags'
+
+  resources :home do
+    collection do
+      post :local_switcher
+    end
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

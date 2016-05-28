@@ -1,0 +1,20 @@
+<div class="wrapper wrapper-content animated fadeInRight">
+
+  <div class="row">
+    <% @tags.each_with_index do |tag, indx| %>
+        <div class="col-lg-3">
+          <div class="widget style1 <%= indx%2 == 0 ? 'lazur-bg' : 'yellow-bg' %>">
+            <div class="row">
+              <div class="col-xs-4">
+                <i class="fa fa-tag fa-2x"></i>
+              </div>
+              <div class="col-xs-8 text-right">
+                <span> X <%= tag[0] %> </span>
+                <h2 class="font-bold"><%= tag[1] %></h2>
+              </div>
+            </div>
+          </div>
+        </div>
+    <% end %>
+  </div>
+</div>

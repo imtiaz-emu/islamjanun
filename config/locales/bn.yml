@@ -1,0 +1,39 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
+bn:
+  hello: "ইসলাম জানুন"
+  rules:
+    one: "দয়া করে বাংলা বা ইংরেজীতে প্রশ্ন বা উত্তর লিখুন। ইংরেজীতে বাংলা লিখবেন না।"
+    two: "নিজের প্রশ্নে বা উত্তরে আপনি ভোট দিতে পারবেন না।"
+    three: "প্রশ্নের সাথে কোন উত্তর থাকাকালীন আপনি প্রশ্নটি মুছে ফেলতে পারবেন না।"
+    four: "নিজের উত্তর ডিলিট করে দিলে ওই উত্তরের যেসব পয়েন্ট আপনি পেয়েছেন তা বিয়োগ হবে।"
+    five: "<p>পয়েন্ট:</p>
+      <ul>
+        <li>প্রশ্ন: Upvote ১০<li>
+        <li>প্রশ্ন: DownVote -৩<li>
+        <li>উত্তর: Upvote ১৫<li>
+        <li>উত্তর: DownVote -৪<li>
+        <li>সঠিক উত্তর: ২০<li>
+      </ul>
+    "
+    six: "এটি একটি Open source project. কোনো সমস্যা বা রিকোয়েস্ট থাকলে  পোস্ট করুন  %{href}"
+    link: "এখানে"

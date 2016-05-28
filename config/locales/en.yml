@@ -20,4 +20,20 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  hello: "ইসলাম জানুন"
+  rules:
+    one: "Write either Bangla or English. Don't create questions/answers with a mixture of Bangla & English!"
+    two: "You cannot upvote/downvote your question or answer."
+    three: "You can't delete a question if there's any answer present for that question."
+    four: "If you delete your answer, then the voting points for that answer will be deducted from your account."
+    five: "<p>Points:</p>
+      <ul>
+        <li>Question: Upvote 10<li>
+        <li>Question: DownVote -3<li>
+        <li>Answer: Upvote 15<li>
+        <li>Answer: DownVote -4<li>
+        <li>Accepted Answer: 20<li>
+      </ul>
+    "
+    six: "It's a Open source project. Feel free to create issues or requests on %{href}"
+    link: "here"
