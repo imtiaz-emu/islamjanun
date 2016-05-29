@@ -1,0 +1,2 @@
+var answer_id = <%= @answer.id %>;
+$("#answer_" + answer_id.toString() + " .avote-operations").html('<%=j render :partial => 'shared/avotes', locals: {answer: @answer} %>');

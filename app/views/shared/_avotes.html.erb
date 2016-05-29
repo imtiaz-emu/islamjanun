@@ -12,4 +12,14 @@
   <a href="<%= downvote_path(a_id: answer.id) %>" data-remote="true">
     <i class="fa fa-chevron-down fa-3x <%= downvoted(answer) ? 'voted' : 'not-voted' %>"> </i>
   </a>
+
+  <% if current_user == answer.question.user %>
+      <a href="<%= accepted_path(a_id: answer.id) %>" data-remote="true">
+        <i class="fa fa-check fa-3x <%= answer.accepted ? 'accepted' : 'not-voted' %>"> </i>
+      </a>
+  <% else %>
+      <a href="javascript:void(0)">
+        <i class="fa fa-check fa-3x <%= answer.accepted ? 'accepted' : 'hidden' %>"> </i>
+      </a>
+  <% end %>
 </div>

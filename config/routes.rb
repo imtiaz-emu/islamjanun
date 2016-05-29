@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 
   get '/upvote' => 'vote#upvote'
   get '/downvote' => 'vote#downvote'
+  get '/accepted' => 'vote#accepted'
 
   resources :profiles, only: [:show, :edit, :update]
 

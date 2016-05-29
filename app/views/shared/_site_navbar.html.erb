@@ -18,14 +18,7 @@
 
     <% if current_user %>
         <li class="user-info">
-           <%= link_to profile_path(current_user.profile) do %>
-              <%= image_tag current_user.profile.photo.present? ? current_user.profile.photo_url(:thumb) : 'http://placehold.it/50x50' %>
-
-              <span>
-                <span style="margin-left: 5px"><%= current_user.profile.name %></span>
-                <span><i class="fa fa-trophy text-warning"></i><%= current_user.profile.points %> </span>
-              </span>
-          <% end %>
+           <%= render :partial => 'shared/user_info' %>
         </li>
 
         <li>

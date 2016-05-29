@@ -41,7 +41,40 @@ class VoteController < ApplicationController
     end
   end
 
+  def accepted
+    @answer = Answer.find(params[:a_id])
+    question = @answer.question
+    if current_user == question.user
+      if @answer.user != current_user
+        update_points(@answer, question)
+      end
+    end
+  end
+
   private
+
+  def update_points(answer, question)
+    previousAccepted = question.answers.find_by(accepted: true)
+    currentProfile = answer.user.profile
+    questionerProfile = question.user.profile
+    if previousAccepted.present?
+      if previousAccepted == answer
+        answer.update_column(:accepted, false)
+        currentProfile.update_column(:points, currentProfile.points - 20)
+        questionerProfile.update_column(:points, questionerProfile.points - 5)
+      else
+        previousAccepted.update_column(:accepted, false)
+        answer.update_column(:accepted, true)
+        previousProfile = previousAccepted.user.profile
+        previousProfile.update_column(:points, previousProfile.points - 20)
+        currentProfile.update_column(:points, currentProfile.points + 20)
+      end
+    else
+      answer.update_column(:accepted, true)
+      currentProfile.update_column(:points, currentProfile.points + 20)
+      questionerProfile.update_column(:points, questionerProfile.points + 5)
+    end
+  end
 
   def find_upvotable
     if params[:a_id].present?
