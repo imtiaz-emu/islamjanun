@@ -1,5 +1,7 @@
-# rails-pack
-Rails pack is a basic project for creating rails application from scratch. Rails pack includes devise, cancan, twitter bootstrep
+# Islam Janun
+It's a basic Q&A site like stackoverflow which is built with Ruby on Rails
+It uses "Rails - 4.2.6", "Ruby - 2.3.0"
+This project uses "MySQL" database. 
 
 #Installation Steps
 Copy config/database-sample.yml and create a new file called config/database.yml file
