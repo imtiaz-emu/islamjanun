@@ -18,10 +18,6 @@
 //= require tinymce
 //= require plugins/metisMenu/jquery.metisMenu
 //= require plugins/slimscroll/jquery.slimscroll.min
-//= require plugins/flot/jquery.flot
-//= require plugins/flot/jquery.flot.tooltip.min
-//= require plugins/flot/jquery.flot.resize
-//= require plugins/flot/jquery.flot.symbol
 //= require inspinia
 //= require plugins/pace/pace.min
 //= require plugins/jquery-ui/jquery-ui.min
