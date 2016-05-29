@@ -6,6 +6,7 @@ class ProfilesController < ApplicationController
   # GET /profiles/1
   # GET /profiles/1.json
   def show
+    @user = User.includes(:questions => [:upvotes, :downvotes], :answers => [:upvotes, :downvotes]).find(@profile.user.id)
   end
 
   # GET /profiles/1/edit
