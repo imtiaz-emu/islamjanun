@@ -10,4 +10,8 @@ class PagesController < ApplicationController
 
   end
 
+  def users
+    @users = User.includes(:profile).map{|u| u if !u.role?(:super_admin)}.delete_if{|u| u == nil}
+  end
+
 end
