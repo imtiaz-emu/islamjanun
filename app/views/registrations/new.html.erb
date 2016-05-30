@@ -20,36 +20,7 @@
   <% end %>
   <div class="main-container headerOffset">
     <div class="row userInfo">
-      <div class="col-xs-6 col-sm-6">
-        <h2 class="section-title-inner">
-        <span>
-          <i class="fa fa-lock"></i>
-          Authentication
-        </span>
-        </h2>
-
-        <div class="control-group">
-          <%= link_to user_omniauth_authorize_path(:facebook), :class => 'btn btn-block btn-social btn-facebook' do %>
-              <i class="fa fa-facebook"></i> Sign up with Facebook
-          <% end %>
-
-          <br/>
-          <%= link_to user_omniauth_authorize_path(:twitter), :class => 'btn btn-block btn-social btn-twitter' do %>
-              <i class="fa fa-twitter"></i> Sign up with Twitter
-          <% end %>
-
-          <br/>
-          <%= link_to user_omniauth_authorize_path(:google_oauth2), :class => 'btn btn-block btn-social btn-google' do %>
-              <i class="fa fa-google"></i> Sign up with Google
-          <% end %>
-
-          <br/>
-          <%= link_to user_omniauth_authorize_path(:linkedin), :class => 'btn btn-block btn-social btn-linkedin' do %>
-              <i class="fa fa-linkedin"></i> Sign up with Linked In
-          <% end %>
-        </div>
-      </div>
-      <div class="col-xs-12 col-sm-6 login-with-oauth">
+      <div class="col-xs-12 col-sm-12 col-md-offset-2 col-md-8">
         <h2 class="section-title-inner">
         <span>
           <i class="fa fa-user"></i>
