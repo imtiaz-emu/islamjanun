@@ -1,13 +1,27 @@
+set :stage, :staging # change environment
+set :branch, 'development' # change git brunch name
+set :server_name, "104.237.196.10 "
+set :full_app_name, "#{fetch(:application)}_#{fetch(:stage)}"
+
 # Simple Role Syntax
 # ==================
 # Supports bulk-adding hosts to roles, the primary server in each group
 # is considered to be the first unless any hosts have the primary
 # property set.  Don't declare `role :all`, it's a meta role.
+#
+#role :app, %w{deploy@example.com}
+#role :web, %w{deploy@example.com}
+#role :db,  %w{deploy@example.com}
 
-role :app, %w{deploy@example.com}
-role :web, %w{deploy@example.com}
-role :db,  %w{deploy@example.com}
+# set your own server's IP
 
+role :web, "104.237.196.10" # Your HTTP server, Apache/etc
+role :app, "104.237.196.10" # This may be the same as your `Web` server
+role :db, "104.237.196.10", :primary => true # This is where Rails migrations will run
+
+set :deploy_to, '/home/apps/islamjanun' # change the directory of project
+
+set 'rails_env', :staging
 
 # Extended Server Syntax
 # ======================
@@ -15,7 +29,7 @@ role :db,  %w{deploy@example.com}
 # server list. The second argument is a, or duck-types, Hash and is
 # used to set extended properties on the server.
 
-server 'example.com', user: 'deploy', roles: %w{web app}, my_property: :my_value
+#server 'example.com', user: 'deploy', roles: %w{web app}, my_property: :my_value
 
 
 # Custom SSH Options
@@ -25,21 +39,9 @@ server 'example.com', user: 'deploy', roles: %w{web app}, my_property: :my_value
 #
 # Global options
 # --------------
-#  set :ssh_options, {
-#    keys: %w(/home/rlisowski/.ssh/id_rsa),
-#    forward_agent: false,
-#    auth_methods: %w(password)
-#  }
-#
-# And/or per server (overrides global)
-# ------------------------------------
-# server 'example.com',
-#   user: 'user_name',
-#   roles: %w{web app},
-#   ssh_options: {
-#     user: 'user_name', # overrides user setting above
-#     keys: %w(/home/user_name/.ssh/id_rsa),
-#     forward_agent: false,
-#     auth_methods: %w(publickey password)
-#     # password: 'please use keys'
-#   }
+set :ssh_options, {
+                    forward_agent: false,
+                    auth_methods: %w(password),
+                    password: '********', # change to your password
+                    user: 'root',  # change to your server SSH user
+                }

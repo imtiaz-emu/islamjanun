@@ -1,10 +1,10 @@
 # config valid only for Capistrano 3.1
 lock '3.2.1'
 
-set :application, 'your_app_name'
-set :repo_url, 'your_repo_url.git'
+set :application, 'islamjanun'
+set :repo_url, 'git@github.com:imtiaz-emu/islamjanun.git'
 
-set :user, 'deployer'  # your server SSH user
+set :user, 'root'
 set :use_sudo, false
 
 # Default branch is :master
@@ -19,7 +19,7 @@ set :deploy_via, :remote_cache # off while it is first deployment
 
 # Default value for :format is :pretty
 # set :format, :pretty
-set :rvm1_ruby_version, "ruby-2.1.5"
+set :rvm1_ruby_version, "ruby-2.3.0"
 
 # Default value for :log_level is :debug
 # set :log_level, :debug
@@ -45,7 +45,7 @@ set :keep_releases, 5
 
 # set config unicorn.rb, unicorn_init.sh, nginx.conf file permission after deployment
 set :file_permissions_roles, :all
-set :file_permissions_users, ['deployer']
+set :file_permissions_users, ['root']
 set :file_permissions_chmod_mode, "0777"
 
 
@@ -58,6 +58,10 @@ namespace :deploy do
       execute :touch, release_path.join('tmp/restart.txt')
       # execute "sudo service nginx restart"
       # execute "sudo service unicorn restart"
+    end
+
+    task :setup_solr_data_dir do
+      run "mkdir -p #{shared_path}/solr/data"
     end
   end
 
@@ -73,6 +77,26 @@ namespace :deploy do
       # end
     end
   end
+
+  namespace :solr do
+    desc "start solr"
+    task :start, :roles => :app, :except => { :no_release => true } do
+      run "cd #{current_path} && RAILS_ENV=#{rails_env} bundle exec sunspot-solr start --port=8983 --data-directory=#{shared_path}/solr/data --pid-dir=#{shared_path}/pids"
+    end
+    desc "stop solr"
+    task :stop, :roles => :app, :except => { :no_release => true } do
+      run "cd #{current_path} && RAILS_ENV=#{rails_env} bundle exec sunspot-solr stop --port=8983 --data-directory=#{shared_path}/solr/data --pid-dir=#{shared_path}/pids"
+    end
+    desc "reindex the whole database"
+    task :reindex, :roles => :app do
+      stop
+      run "rm -rf #{shared_path}/solr/data"
+      start
+      run "cd #{current_path} && RAILS_ENV=#{rails_env} bundle exec rake sunspot:solr:reindex"
+    end
+  end
+
+  after 'deploy:setup', 'deploy:setup_solr_data_dir'
 end
 
 
