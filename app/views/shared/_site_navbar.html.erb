@@ -3,11 +3,12 @@
 
     <a class="navbar-minimalize minimalize-styl-2" href="<%= root_path %>"><%= t('hello') %></a>
 
-    <form role="search" class="navbar-form-custom" action="#">
-      <div class="form-group">
-        <input type="text" placeholder="Search for something..." class="form-control" name="top-search" id="top-search">
-      </div>
-    </form>
+    <%= form_tag search_path, :method => :get, class: "navbar-form-custom" do %>
+        <div class="form-group">
+          <%= text_field_tag :keywords, params[:keywords], placeholder: "Search for something...",  class: "form-control", id: "top-search" %>
+        </div>
+    <% end %>
+
   </div>
   <ul class="nav navbar-top-links navbar-right">
     <li>

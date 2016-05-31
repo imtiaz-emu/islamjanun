@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   get '/pages/tags' => 'pages#tags'
   get '/pages/rules' => 'pages#rules'
   get '/users' => 'pages#users'
+  get 'search' => 'search#search', :as => 'search'
 
   devise_for :users, path_names: { sign_up: 'register' },
              controllers: {  omniauth_callbacks:  'users/omniauth_callbacks',

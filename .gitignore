@@ -36,3 +36,17 @@ build/
 config/database.yml
 /log/
 /public/uploads/
+solr/development
+solr/pids
+solr-cmd
+sunspot-solr.pid
+log/sunspot-solr-development.logsolr-cmd
+solr/test
+solr/development
+solr/production
+solr/default/data
+/log/*.log.lck
+
+.rvmrc
+
+vendor/bundle

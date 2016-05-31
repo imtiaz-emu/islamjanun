@@ -1,0 +1,130 @@
+<div class="row">
+  <h2>Search Results</h2>
+  <div class="col-md-9">
+    <% @hits.each do |hit| %>
+        <% question = Question.find hit.primary_key %>
+        <div class="row">
+          <div id="question_<%= question.id %>">
+            <div class="col-md-3">
+              <table class="table small m-b-xs">
+                <tbody>
+                <tr>
+                  <td>
+                    <strong><%= question.upvotes.count %></strong> Upvotes
+                  </td>
+                  <td>
+                    <strong><%= question.downvotes.count %></strong> Downvotes
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong><%= question.comments.count %></strong> Comments
+                  </td>
+                  <td>
+                    <strong><%= question.impressionist_count %></strong> Views
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <strong><%= question.tags.count %></strong> Tags
+                  </td>
+                  <td>
+                    <strong><%= question.answers.count %></strong> Answers
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="col-md-9">
+              <div class="ibox">
+                <div class="ibox-content">
+                  <a class="btn-link" href="<%= question_path(question) %>" data-no-turbolink>
+                    <h2>
+                      <%= question.title %>
+                    </h2>
+                  </a>
+
+                  <%# hit.highlights(:description).each do |highlight| %>
+                      <%#= highlight.format { |word| "*#{word}*" } %>
+                  <%# end %>
+                  <%#= question.description.html_safe %>
+
+                  <div class="row">
+                    <div class="col-md-8">
+                      <% question.tag_list.each do |tag| %>
+                          <%= link_to tag, questions_path(t: tag), class: 'btn btn-primary btn-xs' %>
+                      <% end %>
+                      <div class="vote-info q-user-interactions">
+                        <i class="fa fa-clock-o"></i> <%= distance_of_time_in_words(Time.now, question.created_at) %>
+                        <i class="fa fa-eraser"></i> <%= distance_of_time_in_words(Time.now, question.updated_at) %>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="small">
+                        <div class="social-avatar">
+                          <a class="pull-left" href="<%= profile_path(question.user.profile) %>">
+                            <%= image_tag question.user.profile.photo.present? ? question.user.profile.photo_url(:thumb) : 'http://placehold.it/50x50' %>
+                          </a>
+
+                          <div class="media-body">
+                            <a href="<%= profile_path(question.user.profile) %>">
+                              <%= question.user.profile.name %>
+                            </a>
+                            <small class="text-muted"><%= question.user.profile.points %> Points</small>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    <% end %>
+  </div>
+
+  <div class="col-md-3">
+    <%
+       facets_html = ''
+       if not @search.nil?
+
+         # check for existing tags in query string
+         existing_tag_facets = []
+         if params[:tag].present?
+           existing_tag_facets = params[:tag]
+         end
+
+         facet_links_off = ''
+         facet_links_on = ''
+
+         @search.facet(:tag_list).rows.each_with_index do |facet, index|
+           break if index == 10;
+
+           # check if facet is selected
+           if (params[:tag].kind_of?(Array) and params[:tag].include? facet.value)
+             tag_facets = existing_tag_facets - [facet.value]
+             facet_links_on << "<li>#{link_to facet.value, :keywords => params[:keywords], :tag => tag_facets} (-)</li>"
+           elsif @hits.size > 1
+             tag_facets = existing_tag_facets + [facet.value]
+             facet_links_off << "<li>#{link_to facet.value, :keywords => params[:keywords], :tag => tag_facets} (#{facet.count})</li>"
+           end
+
+         end
+
+         facets_html << "<strong>Filter by tags</strong>"
+         if facet_links_on.size > 0
+           facets_html << "<ul class='search_facets_on'>#{facet_links_on}</ul>"
+         end
+         if facet_links_off.size > 0
+           facets_html << "<ul class='search_facets_off'>#{facet_links_off}</ul>"
+         end
+
+       end
+    %>
+    <%= raw facets_html %>
+
+    <%= render :partial => 'shared/dashboard_sidebar' %>
+
+  </div>
+</div>

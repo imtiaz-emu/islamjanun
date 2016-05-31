@@ -37,6 +37,7 @@ group :development, :test do
   gem 'web-console', '~> 2.0'
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'sunspot_solr'
   # for deployment
   gem 'capistrano', '~> 3.2.1'
   gem 'capistrano-ext', '~> 1.2.1'
@@ -61,3 +62,4 @@ gem 'font-awesome-rails', '~> 4.6', '>= 4.6.2.0'
 gem 'tinymce-rails', '~> 4.3', '>= 4.3.12'
 gem 'acts-as-taggable-on', '~> 3.5'
 gem 'impressionist', '~> 1.5', '>= 1.5.1'
+gem 'sunspot_rails', '~> 2.2', '>= 2.2.5'
