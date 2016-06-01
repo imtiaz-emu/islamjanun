@@ -1,6 +1,6 @@
 set :stage, :staging # change environment
 set :branch, 'development' # change git brunch name
-set :server_name, "104.237.196.10 "
+set :server_name, "XX.XX.XX.XX"
 set :full_app_name, "#{fetch(:application)}_#{fetch(:stage)}"
 
 # Simple Role Syntax
@@ -15,9 +15,9 @@ set :full_app_name, "#{fetch(:application)}_#{fetch(:stage)}"
 
 # set your own server's IP
 
-role :web, "104.237.196.10" # Your HTTP server, Apache/etc
-role :app, "104.237.196.10" # This may be the same as your `Web` server
-role :db, "104.237.196.10", :primary => true # This is where Rails migrations will run
+role :web, "XX.XX.XX.XX" # Your HTTP server, Apache/etc
+role :app, "XX.XX.XX.XX" # This may be the same as your `Web` server
+role :db, "XX.XX.XX.XX", :primary => true # This is where Rails migrations will run
 
 set :deploy_to, '/home/apps/islamjanun' # change the directory of project
 
@@ -42,6 +42,6 @@ set 'rails_env', :staging
 set :ssh_options, {
                     forward_agent: false,
                     auth_methods: %w(password),
-                    password: '********', # change to your password
+                    password: 'xxxxxxxxx', # change to your password
                     user: 'root',  # change to your server SSH user
                 }
