@@ -62,21 +62,27 @@
 
 <script>
 
-    $('#question_tag_list').tagsInput({
-        'defaultText':'add tag...',
-        'height':'60px',
-        'width':'100%',
-        'autocomplete_url': '/all_tags.json',
-        'autocomplete': {}
-    });
+  $(document).ready(function(){
+      $('#question_tag_list').tagsInput({
+          'defaultText':'add tag...',
+          'height':'60px',
+          'width':'100%',
+          'autocomplete_url': '/all_tags.json',
+          'autocomplete': {}
+      });
 
 
 
-    $('#answer-submit-btn').click(function(){
-        var content = tinymce.editors[0].getContent();
-        if(content.length > 20){
-            $('.hidden-submit-btn').click();
-        }
-    })
+      $('#answer-submit-btn').click(function(){
+          var content = tinymce.editors[0].getContent();
+          if(content.length > 20){
+              $('.hidden-submit-btn').click();
+          }
+          else{
+              alert('Question description must be minimum 20 characters')
+          }
+      })
+
+  })
 
 </script>

@@ -39,8 +39,8 @@
                 <h5><strong><%= @profile.points %></strong> Points</h5>
               </div>
               <% if @profile.fb_link %>
-                  <div class="col-md-4">
-                    <h5><strong><%= @profile.points %></strong> Points</h5>
+                  <div class="col-md-12">
+                    <%= link_to "https://facebook.com/#{@profile.fb_link}", "https://facebook.com/#{@profile.fb_link}" %>
                   </div>
               <% end %>
             </div>

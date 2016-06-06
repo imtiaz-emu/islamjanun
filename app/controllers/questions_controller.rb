@@ -1,5 +1,5 @@
 class QuestionsController < ApplicationController
-  skip_before_filter :verify_authenticity_token, only: [:destroy]
+  skip_before_filter :verify_authenticity_token, only: [:destroy, :approval]
   before_action :authenticate_user!, except: [:show, :index]
   before_action :set_question, only: [:edit, :update, :destroy]
 
@@ -10,9 +10,9 @@ class QuestionsController < ApplicationController
   # GET /questions.json
   def index
     if params[:t].present?
-      @questions =  Question.includes(:answers, :user => :profile).order('updated_at DESC').tagged_with(params[:t])
+      @questions =  Question.includes(:answers, :user => :profile).order('updated_at DESC').approved_questions.tagged_with(params[:t])
     else
-      @questions = Question.includes(:answers, :user => :profile).order('updated_at DESC')
+      @questions = Question.includes(:answers, :user => :profile).order('updated_at DESC').approved_questions
     end
   end
 
@@ -20,8 +20,12 @@ class QuestionsController < ApplicationController
   # GET /questions/1.json
   def show
     @question = Question.includes(:answers, :user => :profile).find(params[:id])
-    @no_of_view = @question.impressionist_count
-    @comments = @question.comments.includes(:user => :profile)
+    if @question.approved || moderator?
+      @no_of_view = @question.impressionist_count
+      @comments = @question.comments.includes(:user => :profile)
+    else
+      redirect_to root_path
+    end
   end
 
   # GET /questions/new
@@ -43,7 +47,7 @@ class QuestionsController < ApplicationController
 
     respond_to do |format|
       if @question.save
-        format.html { redirect_to @question, notice: 'Question was successfully created.' }
+        format.html { redirect_to @question, notice: 'Question was successfully created and waiting for approval.' }
         format.json { render :show, status: :created, location: @question }
       else
         format.html { render :new }
@@ -76,7 +80,30 @@ class QuestionsController < ApplicationController
     end
   end
 
+  def pending_questions
+    if current_user.present? && current_user.is_moderator?
+      @questions = Question.includes(:answers, :user => :profile).order('updated_at DESC').unapproved_questions
+    else
+      redirect_to root_path
+    end
+  end
+
+  def approval
+    @question = Question.find(params[:question_id])
+    if current_user.present? && current_user.is_moderator?
+      @question.update_column(:approved, @question.approved ? false : true)
+      redirect_to :back
+    else
+      redirect_to root_path
+    end
+  end
+
+
+
   private
+    def moderator?
+      current_user.present? && current_user.is_moderator?
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_question
       @question = Question.find(params[:id])

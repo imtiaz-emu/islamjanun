@@ -17,6 +17,13 @@ class Question < ActiveRecord::Base
     string :tag_list, :multiple => true, :stored => true
   end
 
+  scope :approved_questions, -> {
+    where(:approved => true)
+  }
+  scope :unapproved_questions, -> {
+    where(:approved => false)
+  }
+
   private
 
   def check_if_answer_present

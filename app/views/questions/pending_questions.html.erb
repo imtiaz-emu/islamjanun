@@ -36,7 +36,7 @@
             <div class="col-md-9">
               <div class="ibox">
                 <div class="ibox-content">
-                  <a class="btn-link" href="<%= question_path(question) %>" data-no-turbolink>
+                  <a class="btn-link" href="<%= question_path(question) %>" target="_blank" data-no-turbolink>
                     <h2>
                       <%= question.title %>
                     </h2>
@@ -52,9 +52,7 @@
                       <div class="vote-info q-user-interactions">
                         <i class="fa fa-clock-o"></i> <%= distance_of_time_in_words(Time.now, question.created_at) %>
                         <i class="fa fa-eraser"></i> <%= distance_of_time_in_words(Time.now, question.updated_at) %>
-                        <% if current_user && current_user.is_moderator? %>
                         <strong><%= link_to question.approved ? 'Disapprove' : 'Approve', question_approval_path(question), method: 'post' %></strong>
-                        <% end %>
                       </div>
                     </div>
                     <div class="col-md-4">

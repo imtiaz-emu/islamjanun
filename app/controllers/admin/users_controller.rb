@@ -1,6 +1,7 @@
 module Admin
   class UsersController < ApplicationController
     before_filter :authenticate_user!
+    before_filter :authenticate_admin_user!
     layout 'admin'
     before_action :set_admin_user, only: [:show, :edit, :update, :destroy]
 

@@ -6,6 +6,10 @@ Rails.application.routes.draw do
   end
 
   resources :questions do
+    collection do
+      get :pending_questions
+    end
+    post :approval
     resources :answers
   end
 
