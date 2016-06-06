@@ -15,12 +15,18 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
+  attr_accessor :role_id
+
   def role?(role)
     !!self.roles.find_by_name(role.to_s.camelize)
   end
 
   def is_admin?
     self.role?(:super_admin)
+  end
+
+  def is_moderator?
+    self.role?(:moderator)
   end
 
   def self.from_omniauth(access_token)
@@ -101,6 +107,15 @@ class User < ActiveRecord::Base
 
   def email_required?
     false
+  end
+
+  def add_role_by_admin(role_id)
+    self.roles.destroy_all
+    if role_id.nil?
+      self.roles << Role.last
+    else
+      self.roles << Role.find(role_id)
+    end
   end
 
   private
