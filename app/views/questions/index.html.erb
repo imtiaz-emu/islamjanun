@@ -54,6 +54,7 @@
                         <i class="fa fa-eraser"></i> <%= distance_of_time_in_words(Time.now, question.updated_at) %>
                         <% if current_user && current_user.is_moderator? %>
                         <strong><%= link_to question.approved ? 'Disapprove' : 'Approve', question_approval_path(question), method: 'post' %></strong>
+                        <strong><%= link_to 'Delete', question_path(question), method: 'delete' %></strong>
                         <% end %>
                       </div>
                     </div>

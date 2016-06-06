@@ -22,6 +22,7 @@
 en:
   hello: "ইসলাম জানুন"
   rules:
+    zero: 'Approval system is on. Questions will be published by the approval of Moderators.'
     one: "Write either Bangla or English. Don't create questions/answers with a mixture of Bangla & English!"
     two: "You cannot upvote/downvote your question or answer."
     three: "You can't delete a question if there's any answer present for that question."
