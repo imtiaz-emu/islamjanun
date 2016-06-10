@@ -28,8 +28,8 @@
   <h4>Top Tags</h4>
 
   <% all_tags.most_used(10).each do |tag| %>
-      <a class="btn btn-white btn-sm" href="<%= questions_path(t: tag) %>" data-no-turbolink="true">
-        <i class="fa fa-tag"></i> <%= tag %>
+      <a class="btn btn-white btn-sm" href="<%= questions_path(t: tag.name) %>" data-no-turbolink="true">
+        <i class="fa fa-tag"></i> <%= tag.name %>
       </a>
       <%#= link_to tag, questions_path(t: tag), class: 'btn btn-primary btn-xs' %>
   <% end %>
