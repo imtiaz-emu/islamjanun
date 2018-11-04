@@ -1,10 +1,10 @@
 source 'https://rubygems.org'
-
+ruby '2.1.5'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 4.2', '>= 4.2.6'
 # Use postgresql as the database for Active Record
-#gem 'pg'
+# gem 'pg', '~> 0.17.1'
 gem 'mysql2'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0.3'
@@ -60,7 +60,7 @@ gem 'carrierwave', '~> 0.10.0'
 gem 'mini_magick', '~> 4.2.10'
 gem 'font-awesome-rails', '~> 4.6', '>= 4.6.2.0'
 gem 'tinymce-rails', '~> 4.3', '>= 4.3.12'
-gem 'acts-as-taggable-on', '~> 3.5'
+gem 'acts-as-taggable-on', '~> 4.0'
 gem 'impressionist', '~> 1.5', '>= 1.5.1'
 gem 'sunspot_rails'
 gem 'sunspot_solr'
