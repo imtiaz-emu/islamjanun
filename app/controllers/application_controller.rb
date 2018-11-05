@@ -18,6 +18,14 @@ class ApplicationController < ActionController::Base
 
   end
 
+  def admin?
+    current_user.present? && current_user.is_admin?
+  end
+
+  def moderator?
+    current_user.present? && current_user.is_moderator?
+  end
+
   def authenticate_admin_user!
     redirect_to root_path unless current_user.try(:is_admin?)
   end

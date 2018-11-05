@@ -81,7 +81,7 @@ class QuestionsController < ApplicationController
   end
 
   def pending_questions
-    if current_user.present? && current_user.is_moderator?
+    if moderator? || admin?
       @questions = Question.includes(:answers, :user => :profile).order('updated_at DESC').unapproved_questions
     else
       redirect_to root_path
@@ -90,7 +90,7 @@ class QuestionsController < ApplicationController
 
   def approval
     @question = Question.find(params[:question_id])
-    if current_user.present? && current_user.is_moderator?
+    if moderator? || admin?
       @question.update_column(:approved, @question.approved ? false : true)
       redirect_to :back
     else
@@ -101,9 +101,6 @@ class QuestionsController < ApplicationController
 
 
   private
-    def moderator?
-      current_user.present? && current_user.is_moderator?
-    end
     # Use callbacks to share common setup or constraints between actions.
     def set_question
       @question = Question.find(params[:id])
