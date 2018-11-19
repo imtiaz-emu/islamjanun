@@ -37,7 +37,6 @@ group :development, :test do
   gem 'web-console', '~> 2.0'
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'sunspot_solr'
   # for deployment
   gem 'capistrano', '~> 3.2.1'
   gem 'capistrano-ext', '~> 1.2.1'
