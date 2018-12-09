@@ -116,6 +116,7 @@ GEM
       less (~> 2.6.0)
       sprockets (> 2, < 4)
       tilt
+    libv8 (3.16.14.19)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.4)
@@ -123,12 +124,6 @@ GEM
     mime-types (3.1)
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)
-    mina (1.2.3)
-      open4 (~> 1.3.4)
-      rake
-    mina-puma (0.3.1)
-      mina
-      puma (>= 2.13)
     mini_magick (4.2.10)
     mini_portile2 (2.0.0)
     minitest (5.9.0)
@@ -170,10 +165,8 @@ GEM
     omniauth-twitter (1.2.1)
       json (~> 1.3)
       omniauth-oauth (~> 1.1)
-    open4 (1.3.4)
     orm_adapter (0.5.0)
     pr_geohash (1.0.0)
-    puma (3.11.4)
     rack (1.6.4)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -204,6 +197,7 @@ GEM
     rake (11.1.2)
     rdoc (4.2.2)
       json (~> 1.4)
+    ref (2.0.0)
     responders (2.2.0)
       railties (>= 4.2.0, < 5.1)
     rsolr (1.1.1)
@@ -240,6 +234,9 @@ GEM
       rails (>= 3)
       sunspot (= 2.2.5)
     sunspot_solr (2.2.5)
+    therubyracer (0.12.3)
+      libv8 (~> 3.16.14.15)
+      ref
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (2.0.4)
@@ -279,12 +276,11 @@ DEPENDENCIES
   capistrano-rails (~> 1.1.2)
   carrierwave (~> 0.10.0)
   devise
+  execjs
   font-awesome-rails (~> 4.6, >= 4.6.2.0)
   impressionist (~> 1.5, >= 1.5.1)
   jbuilder (~> 2.0)
   jquery-rails
-  mina (~> 1.2, >= 1.2.3)
-  mina-puma (~> 0.3.1)
   mini_magick (~> 4.2.10)
   mysql2
   omniauth (~> 1.2.2)
@@ -299,6 +295,7 @@ DEPENDENCIES
   sshkit (~> 1.7.1)
   sunspot_rails
   sunspot_solr
+  therubyracer
   tinymce-rails (~> 4.3, >= 4.3.12)
   turbolinks
   twitter-bootstrap-rails
