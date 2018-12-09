@@ -1,6 +1,6 @@
 set :stage, :production # change environment
 set :branch, 'master' # change git brunch name
-set :server_name, "xx.xx.xx.xx" # change to your server IP
+set :server_name, "184.164.90.50"
 set :full_app_name, "#{fetch(:application)}_#{fetch(:stage)}"
 
 # Simple Role Syntax
@@ -15,11 +15,11 @@ set :full_app_name, "#{fetch(:application)}_#{fetch(:stage)}"
 
 # set your own server's IP
 
-role :web, "xx.xx.xx.xx" # Your HTTP server, Apache/etc
-role :app, "xx.xx.xx.xx" # This may be the same as your `Web` server
-role :db, "xx.xx.xx.xx", :primary => true # This is where Rails migrations will run
+role :web, "184.164.90.50 " # Your HTTP server, Apache/etc
+role :app, "184.164.90.50 " # This may be the same as your `Web` server
+role :db, "184.164.90.50 ", :primary => true # This is where Rails migrations will run
 
-set :deploy_to, '/home/deployer/apps/your_app' # change the directory of project
+set :deploy_to, '/home/imtiaz/apps/islamjanun' # change the directory of project
 
 set 'rails_env', :production
 
@@ -39,19 +39,9 @@ set 'rails_env', :production
 #
 # Global options
 # --------------
-
-# if you are deploying with ssh user
 set :ssh_options, {
-                    forward_agent: false,
-                    auth_methods: %w(password),
-                    password: '********', # change to your password
-                    user: 'deployer',  # change to your server SSH user
-                }
-
-# if you are deploying to AWS
-
-# set :ssh_options, {
-#                     forward_agent: true,
-#                     auth_methods: ["publickey"],
-#                     keys: ["/path/of/your/pem_file/my_pem_file.pem"]
-#                 }
+    forward_agent: false,
+    auth_methods: %w(password),
+    password: '********', # change to your password
+    user: 'imtiaz',  # change to your server SSH user
+}
