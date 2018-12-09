@@ -57,16 +57,11 @@ namespace :deploy do
     on roles(:app), in: :sequence, wait: 1 do
       # Your restart mechanism here, for example:
       execute :touch, release_path.join('tmp/restart.txt')
+      execute :rake, "sunspot:solr:run"
       # execute "sudo service nginx restart"
       # execute "sudo service unicorn restart"
     end
 
-  end
-
-  namespace :solr do
-    task :reindex do
-      run "cd #{current_path} && #{rake} RAILS_ENV=#{rails_env} sunspot:solr:reindex"
-    end
   end
 
   before "deploy:updated", "deploy:set_permissions:chmod"
@@ -82,4 +77,20 @@ namespace :deploy do
     end
   end
 
+end
+
+desc 'Runs rake db:seed'
+task :seed => [:set_rails_env] do
+  on primary fetch(:migration_role) do
+    within release_path do
+      with rails_env: fetch(:rails_env) do
+        execute :rake, "db:seed"
+      end
+    end
+  end
+end
+
+desc 'Starts SOLR'
+task :reindex do
+  run "cd #{current_path} && #{rake} RAILS_ENV=#{rails_env} sunspot:solr:reindex"
 end
