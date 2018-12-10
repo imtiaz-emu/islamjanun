@@ -53,31 +53,45 @@ set :file_permissions_chmod_mode, "0777"
 namespace :deploy do
 
   desc 'Restart application'
-  task :restart, :roles => :app, :except => {:no_release => true} do
-    solr.reindex if 'y' == Capistrano::CLI.ui.ask("\n\n Should I reindex all models? (anything but y will cancel)")
-    run "touch #{File.join(current_path, 'tmp', 'restart.txt')}"
-  end
-
-  desc 'create shared data and pid dirs for Solr'
-  task :setup_solr_shared_dirs do
-    # conf dir is not shared as different versions need different configs
-    %w(data pids).each do |path|
-      run "mkdir -p #{shared_path}/solr/#{path}"
+  task :restart do
+    on roles(:app), in: :sequence, wait: 1 do
+      # Your restart mechanism here, for example:
+      execute :touch, release_path.join('tmp/restart.txt')
+      # execute "sudo service nginx restart"
+      # execute "sudo service unicorn restart"
     end
+
   end
 
-
-  desc 'substituses current_path/solr/data and pids with symlinks to the shared dirs'
-  task :link_to_solr_shared_dirs do
-    %w(solr/data solr/pids).each do |solr_path|
-      run "rm -fr #{current_path}/#{solr_path}" #removing might not be necessary with proper .gitignore setup
-      run "ln -s #{shared_path}/#{solr_path} #{current_path}/#{solr_path}"
-    end
+  desc "start solr"
+  task :start, :roles => :app, :except => { :no_release => true } do
+    run "cd #{current_path} && RAILS_ENV=#{rails_env} bundle exec rake sunspot:solr:start"
   end
+
+  desc "stop solr"
+  task :stop, :roles => :app, :except => { :no_release => true } do
+    run "cd #{current_path} && RAILS_ENV=#{rails_env} bundle exec rake sunspot:solr:stop"
+  end
+
+  desc "reindex the whole database"
+  task :reindex, :roles => :app do
+    stop
+    run "rm -rf #{shared_path}/solr/data"
+    start
+    run "cd #{current_path} && RAILS_ENV=#{rails_env} bundle exec rake sunspot:solr:reindex"
+  end
+
+  desc "reload the database with seed data"
+  task :seed do
+    run "cd #{current_path}; bundle exec rake db:seed RAILS_ENV=#{rails_env}"
+  end
+
 
   before "deploy:updated", "deploy:set_permissions:chmod"
 
   after :publishing, :restart
+  after :finishing,  :seed
+  after :finishing,  :reindex
 
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
@@ -88,46 +102,4 @@ namespace :deploy do
     end
   end
 
-end
-
-desc 'Runs rake db:seed'
-task :seed => [:set_rails_env] do
-  on primary fetch(:migration_role) do
-    within release_path do
-      with rails_env: fetch(:rails_env) do
-        execute :rake, "db:seed"
-      end
-    end
-  end
-end
-
-after 'deploy:setup', 'deploy:setup_solr_shared_dirs'
-# rm and symlinks every time we finished uploading code and symlinking to the new release
-after 'deploy:update', 'deploy:link_to_solr_shared_dirs'
-
-
-# Tasks to interact with Solr and SunSpot
-namespace :solr do
-  desc "start solr"
-  task :start, :roles => :app, :except => { :no_release => true } do
-    run "cd #{current_path} && RAILS_ENV=#{rails_env} bundle exec rake sunspot:solr:start"
-  end
-  desc "stop solr"
-  task :stop, :roles => :app, :except => { :no_release => true } do
-    run "cd #{current_path} && RAILS_ENV=#{rails_env} bundle exec rake sunspot:solr:stop"
-  end
-
-  desc "stop solr, remove data, start solr, reindex all records"
-  task :hard_reindex, :roles => :app do
-    stop
-    run "rm -rf #{shared_path}/solr/data/*"
-    start
-    reindex
-  end
-
-
-  desc "simple reindex" #note the yes | reindex to avoid the nil.chomp error
-  task :reindex, roles: :app do
-    run "cd #{current_path} && yes | RAILS_ENV=#{rails_env} bundle exec rake sunspot:solr:reindex"
-  end
 end
