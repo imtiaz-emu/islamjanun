@@ -65,39 +65,41 @@ namespace :deploy do
 
   desc "start solr"
   task :start do
-    on roles(:app), :except => {:no_release => true} do
-      run "cd #{current_path} && RAILS_ENV=#{rails_env} bundle exec rake sunspot:solr:start"
+    on roles(:web), :except => {:no_release => true} do
+      execute "cd #{current_path} && RAILS_ENV=#{fetch(:rails_env)} rake sunspot:solr:start"
     end
   end
 
   desc "stop solr"
   task :stop do
-    on roles(:app), :except => {:no_release => true} do
-      run "cd #{current_path} && RAILS_ENV=#{rails_env} bundle exec rake sunspot:solr:stop"
+    on roles(:web), :except => {:no_release => true} do
+      execute "cd #{current_path} && RAILS_ENV=#{fetch(:rails_env)} rake sunspot:solr:stop"
     end
   end
 
   desc "reindex the whole database"
   task :reindex do
-    on roles(:app) do
+    on roles(:web) do
       stop
-      run "rm -rf #{shared_path}/solr/data"
+      execute "rm -rf #{shared_path}/solr/data"
       start
-      run "cd #{current_path} && RAILS_ENV=#{rails_env} bundle exec rake sunspot:solr:reindex"
+      execute "cd #{current_path} && RAILS_ENV=#{fetch(:rails_env)} rake sunspot:solr:reindex"
     end
   end
 
   desc "reload the database with seed data"
   task :seed do
-    run "cd #{current_path}; bundle exec rake db:seed RAILS_ENV=#{rails_env}"
+    on roles(:all) do
+      execute "cd #{current_path}; rake db:seed RAILS_ENV=#{fetch(:rails_env)}"
+    end
   end
 
 
   before "deploy:updated", "deploy:set_permissions:chmod"
 
   after :publishing, :restart
-  after :finishing, :seed
-  after :finishing, :reindex
+  # after :finishing, :seed
+  # after :finishing, :reindex
 
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
